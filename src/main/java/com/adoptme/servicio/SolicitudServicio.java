@@ -8,8 +8,12 @@ import java.util.List;
 public interface SolicitudServicio {
     void crearSolicitud(Solicitud solicitud, String telefono);
 
-    Solicitud obtenerSolicitudPorId(Long id);
+    Solicitud obtenerSolicitudPorId(Integer id);
 
     List<Solicitud> obtenerSolicitudes();
+
+    List<Solicitud> obtenerSolicitudPorMascotaId(Integer id);
+
+    void eliminarSolicitud(Integer id);
 
 }

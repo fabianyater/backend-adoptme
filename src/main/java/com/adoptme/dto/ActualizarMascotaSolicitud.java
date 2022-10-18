@@ -1,19 +1,21 @@
 package com.adoptme.dto;
 
+import com.adoptme.modelo.Categoria;
+import com.adoptme.modelo.Raza;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MascotaRespuesta {
+public class ActualizarMascotaSolicitud {
     private Integer id;
     private String nombre;
     private String descripcion;
     private String estado;
     private Integer edad;
+    private String foto;
     private Double peso;
     private String sexo;
-    private byte[] foto;
-    private CategoriaDto categoria;
-    private RazaDto raza;
+    private Categoria categoriaId;
+    private Raza razaId;
 }

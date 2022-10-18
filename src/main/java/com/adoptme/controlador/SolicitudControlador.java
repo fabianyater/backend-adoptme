@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/solicitudes")
 public class SolicitudControlador {
@@ -32,4 +31,6 @@ public class SolicitudControlador {
     public ResponseEntity<List<Solicitud>> obtenerSolicitudes() {
         return ResponseEntity.ok(solicitudServicio.obtenerSolicitudes());
     }
+
+
 }

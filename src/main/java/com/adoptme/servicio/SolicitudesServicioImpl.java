@@ -30,12 +30,22 @@ public class SolicitudesServicioImpl implements SolicitudServicio{
     }
 
     @Override
-    public Solicitud obtenerSolicitudPorId(Long id) {
+    public Solicitud obtenerSolicitudPorId(Integer id) {
         return solicitudRepositorio.findById(id).orElse(null);
     }
 
     @Override
     public List<Solicitud> obtenerSolicitudes() {
         return solicitudRepositorio.findAll();
+    }
+
+    @Override
+    public List<Solicitud> obtenerSolicitudPorMascotaId(Integer id) {
+        return solicitudRepositorio.findByMascota_Id(id);
+    }
+
+    @Override
+    public void eliminarSolicitud(Integer id) {
+        solicitudRepositorio.deleteById(id);
     }
 }

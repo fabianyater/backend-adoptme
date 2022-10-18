@@ -1,5 +1,6 @@
 package com.adoptme.servicio;
 
+import com.adoptme.dto.ActualizarMascotaSolicitud;
 import com.adoptme.dto.MascotaRespuesta;
 import com.adoptme.dto.MascotaSolicitud;
 import com.adoptme.dto.UsuarioSolicitud;
@@ -15,7 +16,7 @@ public interface MascotaServicio {
 
     Mascota obtenerMascotaPorId(Integer id);
 
-    void actualizarMascota(Integer id);
+    void actualizarMascota(ActualizarMascotaSolicitud  actualizarMascotaSolicitud);
 
     void eliminarMascota(Integer id);
 }

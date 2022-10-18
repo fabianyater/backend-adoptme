@@ -3,6 +3,8 @@ package com.adoptme.repositorio;
 import com.adoptme.modelo.Solicitud;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SolicitudRepositorio extends JpaRepository<Solicitud, Long> {
+import java.util.List;
 
+public interface SolicitudRepositorio extends JpaRepository<Solicitud, Integer> {
+    List<Solicitud> findByMascota_Id(Integer id);
 }

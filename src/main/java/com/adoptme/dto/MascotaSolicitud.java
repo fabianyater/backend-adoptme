@@ -13,6 +13,8 @@ public class MascotaSolicitud {
     private String estado;
     private Integer edad;
     private String foto;
+    private Double peso;
+    private String sexo;
     private Categoria categoriaId;
     private Raza razaId;
 }

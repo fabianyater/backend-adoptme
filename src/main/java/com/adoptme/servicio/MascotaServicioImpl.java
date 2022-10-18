@@ -1,11 +1,13 @@
 package com.adoptme.servicio;
 
+import com.adoptme.dto.ActualizarMascotaSolicitud;
 import com.adoptme.dto.CategoriaDto;
 import com.adoptme.dto.MascotaRespuesta;
 import com.adoptme.dto.MascotaSolicitud;
 import com.adoptme.dto.RazaDto;
 import com.adoptme.modelo.Categoria;
 import com.adoptme.modelo.Mascota;
+import com.adoptme.modelo.Solicitud;
 import com.adoptme.repositorio.MascotaRepositorio;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ import java.util.List;
 public class MascotaServicioImpl implements MascotaServicio {
     @Autowired
     private MascotaRepositorio mascotaRepositorio;
+
+    @Autowired
+    private SolicitudServicio solicitudServicio;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -42,14 +47,30 @@ public class MascotaServicioImpl implements MascotaServicio {
     }
 
     @Override
-    public void actualizarMascota(Integer id) {
-        Mascota mascota = obtenerMascotaPorId(id);
+    public void actualizarMascota(ActualizarMascotaSolicitud actualizarMascotaSolicitud) {
+        Mascota mascota = obtenerMascotaPorId(actualizarMascotaSolicitud.getId());
+        mascota.setNombre(actualizarMascotaSolicitud.getNombre());
+        mascota.setDescripcion(actualizarMascotaSolicitud.getDescripcion());
+        mascota.setEstado(actualizarMascotaSolicitud.getEstado());
+        mascota.setEdad(actualizarMascotaSolicitud.getEdad());
+        mascota.setFoto(convertirImagen(actualizarMascotaSolicitud.getFoto()));
+        mascota.setPeso(actualizarMascotaSolicitud.getPeso());
+        mascota.setSexo(actualizarMascotaSolicitud.getSexo());
+        mascota.setCategoria(actualizarMascotaSolicitud.getCategoriaId());
+        mascota.setRaza(actualizarMascotaSolicitud.getRazaId());
         mascotaRepositorio.save(mascota);
     }
 
     @Override
     public void eliminarMascota(Integer id) {
-        mascotaRepositorio.deleteById(id);
+        List<Solicitud> solicitudes = solicitudServicio.obtenerSolicitudPorMascotaId(id);
+        if (solicitudes.size() > 0){
+            for (Solicitud solicitud : solicitudes){
+                solicitudServicio.eliminarSolicitud(solicitud.getId());
+            }
+        }else{
+            mascotaRepositorio.deleteById(id);
+        }
     }
 
     private byte[] convertirImagen(String imagen) {
@@ -75,6 +96,8 @@ public class MascotaServicioImpl implements MascotaServicio {
         mascota.setEstado(mascotaSolicitud.getEstado());
         mascota.setEdad(mascotaSolicitud.getEdad());
         mascota.setFoto(convertirImagen(mascotaSolicitud.getFoto()));
+        mascota.setPeso(mascotaSolicitud.getPeso());
+        mascota.setSexo(mascotaSolicitud.getSexo());
         mascota.setCategoria(mascotaSolicitud.getCategoriaId());
         mascota.setRaza(mascotaSolicitud.getRazaId());
         return mascota;
@@ -93,6 +116,8 @@ public class MascotaServicioImpl implements MascotaServicio {
             mascotaRespuesta.setEstado(mascota.getEstado());
             mascotaRespuesta.setEdad(mascota.getEdad());
             mascotaRespuesta.setFoto(mascota.getFoto());
+            mascotaRespuesta.setPeso(mascota.getPeso());
+            mascotaRespuesta.setSexo(mascota.getSexo());
             mascotaRespuesta.setCategoria(categoriaDto);
             mascotaRespuesta.setRaza(razaDto);
             mascotasRespuesta.add(mascotaRespuesta);

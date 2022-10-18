@@ -3,6 +3,7 @@ package com.adoptme.modelo;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +22,12 @@ public class Mascota {
     private Integer id;
     private String nombre;
     private String descripcion;
+    private Double peso;
+    private String sexo;
     private String estado;
     private Integer edad;
     private byte[] foto;
+
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/correos")
-@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class CorreoControlador {
     private final CorreoServicio correoServicio;
