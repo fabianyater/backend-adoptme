@@ -20,7 +20,9 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String correo;
+    private String contrasenia;
     private String direccion;
     private String telefono;
     private Integer edad;
+    private String jwt;
 }

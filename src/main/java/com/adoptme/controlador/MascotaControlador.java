@@ -5,9 +5,10 @@ import com.adoptme.dto.MascotaRespuesta;
 import com.adoptme.dto.MascotaSolicitud;
 import com.adoptme.modelo.Mascota;
 import com.adoptme.servicio.MascotaServicio;
+import com.adoptme.utils.GeneralResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,18 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/mascotas")
+@RequestMapping("/api/mascotas/")
 public class MascotaControlador {
     @Autowired
     private MascotaServicio mascotaServicio;
 
     @PostMapping
-    public ResponseEntity<MascotaSolicitud> crearMascota(@RequestBody MascotaSolicitud mascotaSolicitud) {
+    public ResponseEntity<GeneralResponse<Void>> crearMascota(@RequestBody MascotaSolicitud mascotaSolicitud) {
+        GeneralResponse<Void> response = new GeneralResponse<>();
         mascotaServicio.crearMascota(mascotaSolicitud);
-        return ResponseEntity.ok(mascotaSolicitud);
+        response.setMessage(String.valueOf(201));
+        return ResponseEntity.ok(response);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public ResponseEntity<List<MascotaRespuesta>> obtenerMascotas() {
         return ResponseEntity.ok(mascotaServicio.obtenerMascotas());
     }
