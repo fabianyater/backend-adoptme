@@ -34,7 +34,7 @@ public class MascotaControlador {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<MascotaRespuesta>> obtenerMascotas() {
         return ResponseEntity.ok(mascotaServicio.obtenerMascotas());
     }
