@@ -45,14 +45,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers(
-                        "/api/usuarios/login",
-                        "/api/usuarios/register",
                         "/api/usuarios/solicitud",
-                        "/api/correos/",
+                        "/api/usuarios/login",
+                        "/api/usuarios/{telefono}",
                         "/api/solicitudes/{telefono}",
-                        "/api/usuarios/all",
-                        "/api/mascotas/all",
-                        "/api/mascotas/{id}")
+                        "api/mascotas/all",
+                        "/api/mascotas/agregar",
+                        "/api/mascotas/actualizar",
+                        "/api/mascotas/{id}",
+                        "/api/correos/")
                 .permitAll()
                 .anyRequest().authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

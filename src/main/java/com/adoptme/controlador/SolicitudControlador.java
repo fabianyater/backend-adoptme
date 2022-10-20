@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/solicitudes")
+@RequestMapping("/api/solicitudes/")
 public class SolicitudControlador {
     @Autowired
     private SolicitudServicio solicitudServicio;
 
-    @PostMapping("/{telefono}")
+    @PostMapping("{telefono}")
     public ResponseEntity<Solicitud> crearSolicitud(@RequestBody Solicitud solicitud, @PathVariable String telefono) {
         solicitudServicio.crearSolicitud(solicitud, telefono);
         return ResponseEntity.ok().build();

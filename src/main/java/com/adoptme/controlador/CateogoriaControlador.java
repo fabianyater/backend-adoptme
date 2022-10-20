@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categorias")
+@RequestMapping("/api/categorias/")
 public class CateogoriaControlador {
     @Autowired
     private CategoriaServicio categoriaServicio;

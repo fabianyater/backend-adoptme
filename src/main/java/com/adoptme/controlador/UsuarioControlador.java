@@ -42,7 +42,7 @@ public class UsuarioControlador {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @PostMapping("/solicitud")
+    @PostMapping("solicitud")
     public ResponseEntity<String> registrarUsuario(@RequestBody UsuarioSolicitud usuarioSolicitud) {
         Usuario telefono = usuarioServicio.obtenerUsuarioPorTelefono(usuarioSolicitud.getTelefono());
         if (telefono == null) {
@@ -56,26 +56,26 @@ public class UsuarioControlador {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public ResponseEntity<String> registrarUsuario2(@RequestBody UsuarioRegistro usuarioRegistro) {
         usuarioRegistro.setContrasenia(bCryptPasswordEncoder.encode(usuarioRegistro.getContrasenia()));
         usuarioServicio.registrarUsuario(usuarioRegistro);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("all")
+    @GetMapping
     public ResponseEntity<List<Usuario>> obtenerUsuarios() {
         List<Usuario> usuarios = usuarioServicio.obtenerUsuarios();
         return ResponseEntity.ok(usuarios);
     }
 
-    @GetMapping("/telefono/{telefono}")
+    @GetMapping("{telefono}")
     public ResponseEntity<Usuario> obtenerUsuarioPorTelefono(@PathVariable String telefono) {
         Usuario usuario = usuarioServicio.obtenerUsuarioPorTelefono(telefono);
         return ResponseEntity.ok(usuario);
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<GeneralResponse<Usuario>> login(@RequestBody UsuarioLogin user) {
         GeneralResponse<Usuario> response = new GeneralResponse<>();
         HttpStatus status = null;

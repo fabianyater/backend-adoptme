@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/razas")
+@RequestMapping("/api/razas/")
 public class RazaControlador {
     @Autowired
     private RazaServicio razaServicio;

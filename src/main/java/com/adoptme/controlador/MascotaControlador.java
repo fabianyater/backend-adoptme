@@ -26,7 +26,7 @@ public class MascotaControlador {
     @Autowired
     private MascotaServicio mascotaServicio;
 
-    @PostMapping
+    @PostMapping("agregar")
     public ResponseEntity<GeneralResponse<Void>> crearMascota(@RequestBody MascotaSolicitud mascotaSolicitud) {
         GeneralResponse<Void> response = new GeneralResponse<>();
         mascotaServicio.crearMascota(mascotaSolicitud);
@@ -50,7 +50,7 @@ public class MascotaControlador {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
+    @PutMapping("actualizar")
     public ResponseEntity<Mascota> actualizarMascota(@RequestBody ActualizarMascotaSolicitud actualizarMascotaSolicitud) {
         mascotaServicio.actualizarMascota(actualizarMascotaSolicitud);
         return ResponseEntity.ok().build();
